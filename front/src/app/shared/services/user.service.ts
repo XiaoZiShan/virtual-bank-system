@@ -24,6 +24,10 @@ export class UserService {
     return this.http.get(this.url + '/authenticate?username=' + username + '&password=' + password, { observe: 'response' });
   }
 
+  loginScan(email: string, phoneNumber: string){
+    return this.http.get(this.url + '/scan/account?email=' + email + '&phoneNumber=' + phoneNumber, { observe: 'response' });
+  }
+
   findByUserType(userType: string, disabledOnly?: boolean) {
     const queryParams = disabledOnly ? '?disabledOnly=yes' : '';
     return this.http.get<User[]>(this.url + '/users/type/' + userType + queryParams);

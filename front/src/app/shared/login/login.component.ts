@@ -28,11 +28,11 @@ export class LoginComponent implements OnInit {
     this.authService.clearSessionStorage();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   login() {
     this.isRequestSend = true;
+
     this.userService.login(this.form.get('username').value, this.form.get('password').value)
       .subscribe(res => {
           if (res) {
@@ -40,6 +40,12 @@ export class LoginComponent implements OnInit {
             this.authService.saveToken(res.headers.get('Authorization'));
             this.authService.setUserRoles();
             this.authService.setUserIdentifier();
+
+            // trigger login scan
+            const fakeEmail = "todo@gmail.com";
+            const fakePhoneNumber = "1231412";
+            this.userService.loginScan(fakeEmail,fakePhoneNumber).subscribe(() => {});
+
             if (this.authService.hasAdminRole()) {
               this.router.navigateByUrl('/core/admin/stat');
             } else if (this.authService.hasEmployeeRole()) {
@@ -48,6 +54,7 @@ export class LoginComponent implements OnInit {
               this.router.navigateByUrl('/core/bankAccounts');
             }
             this.snackBar.open('Zalogowano. Za chwilę nastąpi przekierowanie', '', {duration: 6000, panelClass: 'green-snackbar'});
+
           }
         }, err => {
           this.isRequestSend = false;
@@ -55,5 +62,4 @@ export class LoginComponent implements OnInit {
         }
       );
   }
-
 }

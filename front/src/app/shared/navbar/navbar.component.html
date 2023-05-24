@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark height" style="background-color: black">
   <div class="container">
     <div class="text-white sidebar-heading nav-route" style="width:150px" routerLink="/">
-      Wirtualny serwis
+      Virtual service
       <div class="underline" style="background-color: rgb(4, 0, 255)"></div>
     </div>
 
@@ -20,13 +20,13 @@
 
         <span *ngIf="!isMobileView">
           <div class="nav-route" *ngIf="authService.isTokenExpired()" routerLink="login">
-            Logowanie
+            Login
             <div class="underline">
             </div>
           </div>
 
           <div class="nav-route" routerLink="register" *ngIf="authService.isTokenExpired()" >
-            Rejestracja
+            Registration
             <div class="underline">
             </div>
           </div>
